@@ -112,20 +112,20 @@ var ItsATrap = (function() {
 				// Inflict Trap damage
 				on("chat:message", function(msg) {
                     if(msg.content.indexOf("trap") !== -1) {
-                    sendChat(msg.who, "/roll 9d4"){
-                    var hp=0;
-                        _.each(r,function(subr){
-                            var val=JSON.parse(subr.content);
-                            if(_.has(val,'total'))
-                            {
-                                hp+=val.total;
-								hp+=obj.bar2_value;
-                            }
-                        });
-                        obj.set({
-                            bar2_value: hp,
-                        })
-                    };
+                    sendChat(msg.who,"/roll 9d4",function(r){
+						var hp=0;
+							_.each(r,function(subr){
+								var val=JSON.parse(subr.content);
+								if(_.has(val,'total'))
+								{
+									hp+=val.total;
+									hp+=obj.bar1_value;
+								}
+							});
+							obj.set({
+								bar1_value: hp
+							})
+						});
                     }
                 });
 
