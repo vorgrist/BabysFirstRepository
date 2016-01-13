@@ -112,8 +112,8 @@ var ItsATrap = (function() {
 				// Inflict Trap damage
 				on("chat:message", function(msg) {
                     if(msg.content.indexOf("trap") !== -1) {
-                    sendChat(msg.who,"/roll 9d4",function(r){
-						var hp=0;
+						sendChat(msg.who,"/roll 9d4",function(r){
+							var hp=0;
 							_.each(r,function(subr){
 								var val=JSON.parse(subr.content);
 								if(_.has(val,'total'))
@@ -123,12 +123,12 @@ var ItsATrap = (function() {
 								}
 							});
 							obj.set({
-								bar1_value: hp
+								bar1_value: hp,
+								bar1_max: obj.bar1_max
 							})
 						});
-                    }
-                });
-
+					}
+				});
 
               moveTokenToTrap(obj, trap);
 
