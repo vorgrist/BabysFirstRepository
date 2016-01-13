@@ -1,0 +1,24 @@
+{
+    "name": "Trap With Damage",
+    "version": "0.1",
+    "description": "Set traps do damge.",
+    "authors": "Vorgrist",
+    "roll20userid": 46544,
+    "dependencies": {
+        "Token Collisions": "1.1",
+        "Vector Math": "1.0"
+    },
+    "modifies": {
+        "chat": "write",
+        "lastmove": "write",
+        "layer": "read, write",
+        "left": "read, write",
+        "status_angel-outfit": "read",
+        "status_bleeding-eye": "read",
+        "status_cobweb": "read",
+        "status_fluffy-wing": "read",
+        "token": "read",
+        "top": "read, write"
+    },
+    "conflicts": []
+}
