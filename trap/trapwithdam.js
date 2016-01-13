@@ -84,7 +84,7 @@ var ItsATrap = (function() {
           }
       }
       return results;
-  }
+  };
 
 
   /**
@@ -103,28 +103,23 @@ var ItsATrap = (function() {
 
     	if(trap) {
 			var trapName = trap.get("name");
-			if(trapName) {
-				sendChat("Vorgrist", obj.get("name") + " set off a trap: " + trapName + "!");
-			}
-			else {
-				sendChat("Vorgrist", obj.get("name") + " set off a trap!");
-			}
+			var trapDam = trap.get("bar1_value");
+			sendChat("msg.who", obj.get("name") + " set off a trap!");
 				// Inflict Trap damage
 				on("chat:message", function(msg) {
                     if(msg.content.indexOf("trap") !== -1) {
-						sendChat(msg.who,"/roll 9d4",function(r){
-							var hp=0;
+						sendChat(msg.who,"/r " + trapDam,function(r){
+							var hp=obj.get("bar1_value") || 0;
 							_.each(r,function(subr){
 								var val=JSON.parse(subr.content);
 								if(_.has(val,'total'))
 								{
-									hp+=val.total;
-									hp+=obj.bar1_value;
+									hp-=val.total;
+									sendChat("msg.who", trapName + " inflicts " + val.total + " HitPoints of damage!");
 								}
 							});
 							obj.set({
-								bar1_value: hp,
-								bar1_max: obj.bar1_max
+								bar1_value: hp
 							})
 						});
 					}
